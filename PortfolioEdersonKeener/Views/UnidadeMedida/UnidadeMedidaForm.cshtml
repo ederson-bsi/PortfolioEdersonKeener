@@ -1,0 +1,28 @@
+﻿@model PortfolioEdersonKeener.Models.UnidadeMedida
+@{
+    ViewData["Title"] = "UnidadeMedidaForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Titulo</h1>
+
+@using (Html.BeginForm("Salvar", "UnidadeMedida"))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="col-sm-4">
+            @Html.LabelFor(x => x.Descricao)
+            @Html.TextBoxFor(x => x.Descricao, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Descricao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3" style="margin-top:10px !important">
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+    </div>
+}
+

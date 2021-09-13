@@ -1,0 +1,65 @@
+﻿@model PortfolioEdersonKeener.Models.Estoque
+@{
+    ViewData["Title"] = "EstoqueForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var quant = $("#Quantidade").val();
+        if (quant == 0) {
+            $('.mydiv').hide();
+        } else {
+            $('.mydiv').show();
+            setTimeout(function () {
+                $('.mydiv').fadeOut('fast');
+            }, 5000); // <-- time in milliseconds
+        }
+    });
+</script>
+
+<h1>@ViewBag.Titulo</h1>
+
+@using (Html.BeginForm("Salvar", "Estoque"))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="mydiv alert-danger col-sm-4" style="text-align:center;border:solid 1px">
+            @ViewBag.MsgError
+        </div>
+
+
+        <div class="col-sm-12">
+            @Html.LabelFor(x => x.Produto)
+        </div>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(x => x.IdProduto, new SelectList(ViewBag.ListaProduto, "Id", "Nome"), "Selecione um produto", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.IdProduto, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-12">
+            @Html.LabelFor(x => x.TipoMovimento)
+        </div>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(x => x.TipoMovimento, Html.GetEnumSelectList<TipoMovimentoEstoque>(), "Selecione um Tipo", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.TipoMovimento, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-12">
+            @Html.LabelFor(x => x.Quantidade)
+        </div>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(x => x.Quantidade, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Quantidade, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3" style="padding-top:10px !important">
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+    </div>
+}

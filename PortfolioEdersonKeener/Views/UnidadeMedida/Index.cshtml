@@ -1,0 +1,44 @@
+﻿@model ICollection<PortfolioEdersonKeener.Models.UnidadeMedida>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function ExcluirUnidade(idUnidade) {
+        var redirectPage = "https://" + window.location.host + "/UnidadeMedida/Excluir/" + idUnidade;
+        if (confirm("Deseja realmente excluir esta unidade de medida?")) {
+            window.location.replace(redirectPage);
+        }
+    }
+</script>
+
+<h1>Lista de Marcas</h1>
+
+<div class="form-group">
+    @Html.ActionLink("Novo Cadastro", "Create", "UnidadeMedida", null, new { @class = "btn btn-success" })
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>CÓDIGO</th>
+            <th>UNIDADE DE MEDIDA</th>
+            <th>AÇÕES</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var unidade in Model)
+        {
+            <tr>
+                <td>@unidade.Id</td>
+                <td>@unidade.Descricao</td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", "UnidadeMedida", new { id = unidade.Id }, new { @class = "btn btn-warning" })
+                    <button type="button" class="btn btn-danger" onclick="ExcluirUnidade(@unidade.Id)">Excluir</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

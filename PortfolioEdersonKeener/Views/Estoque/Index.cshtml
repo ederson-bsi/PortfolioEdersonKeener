@@ -1,0 +1,44 @@
+﻿@model ICollection<PortfolioEdersonKeener.Models.Estoque>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Movimentação de estoque</h1>
+
+<div class="form-group">
+    @Html.ActionLink("Adicionar", "Create", "Estoque", null, new { @class = "btn btn-success" })
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>PRODUTO</th>
+            <th>CODIGO PRODUTO</th>
+            <th>ESTOQUE MÍNIMO</th>
+            <th>TIPO MOVIMENTO</th>
+            <th>QUANTIDADE</th>
+            <th>DATA MOVIMENTO</th>
+            <th>ESTOQUE ATUAL</th>
+            <th>AÇÕES</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var estoque in Model)
+        {
+            <tr>
+                <td>@estoque.Produto.Nome</td>
+                <td>@estoque.Produto.CodigoProduto</td>
+                <td>@estoque.Produto.EstoqueMinimo</td>
+                <td>@estoque.TipoMovimento</td>
+                <td>@estoque.Quantidade</td>
+                <td>@estoque.DataMovimento</td>
+                <td>@estoque.EstoqueAtual</td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", "Estoque", new { id = estoque.Id }, new { @class = "btn btn-warning" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

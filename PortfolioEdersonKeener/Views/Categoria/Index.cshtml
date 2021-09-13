@@ -1,0 +1,44 @@
+﻿@model ICollection<PortfolioEdersonKeener.Models.Categoria>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function CategoriaExcluir(idCategoria) {
+        var redirectPage = "https://" + window.location.host + "/Categoria/Excluir/" + idCategoria;
+
+        if (confirm("Deseja realmente excluir esta Categoria?")) {
+            window.location.replace(redirectPage);
+        }
+    }
+</script>
+
+<h2>Lista de Categoria</h2>
+
+<div class="form-group">
+    @Html.ActionLink("Nova Categoria", "Create", "Categoria", null, new { @class = "btn btn-success" })
+</div>
+
+<table class="table table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var categoria in Model)
+        {
+            <tr>
+                <td>@categoria.Nome</td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", "Categoria", new { id = categoria.Id }, new { @class = "btn btn-warning" })
+                    <button onclick="CategoriaExcluir(@categoria.Id)" class="btn btn-danger">Excluir</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

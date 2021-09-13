@@ -1,0 +1,28 @@
+﻿@model PortfolioEdersonKeener.Models.Categoria
+@{
+    ViewBag.Title = "CategoriaForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Titulo</h2>
+
+@using (Html.BeginForm("Salvar", "Categoria"))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="col-sm-4">
+            @Html.LabelFor(x => x.Nome)
+            @Html.TextBoxFor(x => x.Nome, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Nome, "", new { @class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3" style="margin-top:10px !important">
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+    </div>
+}
+

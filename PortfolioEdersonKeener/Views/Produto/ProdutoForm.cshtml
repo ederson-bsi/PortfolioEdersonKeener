@@ -1,0 +1,85 @@
+﻿@model PortfolioEdersonKeener.Models.Produto
+@{
+    ViewData["Title"] = "ProdutoForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Titulo</h1>
+
+@using (Html.BeginForm("Salvar", "Produto"))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="row">
+        <div class="col-sm-4">
+            @Html.LabelFor(x => x.Nome)
+            @Html.TextBoxFor(x => x.Nome, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.Nome, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-2">
+            @Html.LabelFor(x => x.CodigoProduto)
+            @Html.TextBoxFor(x => x.CodigoProduto, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.CodigoProduto, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-sm-3">
+            @Html.LabelFor(x => x.Categoria)
+            @Html.DropDownListFor(x => x.IdCategoria, new SelectList(ViewBag.ListaCategoria, "Id", "Nome"), "Selecione uma categoria", new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.IdCategoria, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-sm-3">
+            @Html.LabelFor(x => x.Marca)
+            @Html.DropDownListFor(x => x.IdMarca, new SelectList(ViewBag.ListaMarca, "Id", "Nome"), "Selecione uma marca", new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.IdMarca, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-sm-4">
+            @Html.LabelFor(x => x.UnidadeMedida)
+            @Html.DropDownListFor(x => x.IdUnidadeMedida, new SelectList(ViewBag.ListaUnidadeMedida, "Id", "Descricao"), "Selecione a Un. Medida", new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.IdUnidadeMedida, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-3">
+            @Html.LabelFor(x => x.EstoqueMinimo)
+            @Html.TextBoxFor(x => x.EstoqueMinimo, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.EstoqueMinimo, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-3">
+            @Html.LabelFor(x => x.EstoqueAtual)
+            @Html.TextBoxFor(x => x.EstoqueAtual, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.EstoqueAtual, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-2">
+            @Html.LabelFor(x => x.PrecoCusto)
+            @Html.TextBoxFor(x => x.PrecoCusto, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.PrecoCusto, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-2">
+            @Html.LabelFor(x => x.PrecoVenda)
+            @Html.TextBoxFor(x => x.PrecoVenda, new { @class = "form-control" })
+            @Html.ValidationMessageFor(p => p.PrecoVenda, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-3">
+            @Html.LabelFor(x => x.Validade)
+            @Html.TextBoxFor(x => x.Validade, new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(p => p.Validade, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2" style="margin-top:10px">
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+    </div>
+}
+
